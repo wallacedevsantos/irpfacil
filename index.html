@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="./script.js"></script>
+    <script
+      defer
+      src="https://unpkg.com/xlsx@0.17.4/dist/xlsx.full.min.js"
+    ></script>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="shortcut icon" href="./favicon-32x32.png" type="image/x-icon" />
+    <title>IRPF Fácil</title>
+  </head>
+  <body>
+    <header>
+      <div class="cabecalho">
+        <h1>IRPFácil</h1>
+        <div class="listas">
+          <h2>Suas listas</h2>
+          <div class="menu-list">
+            <select id="menu-listas-salvas"></select>
+            <button id="salvar-lista">Salvar lista como</button>
+            <button id="salvar-lista-atual-btn">Salvar lista atual</button>
+            <button id="apagar-lista-btn">Apagar lista</button>
+            <button id="download-button">Download da lista</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="form-ativo">
+      <div class="infos">
+        <h1>Como declarar cada ativo</h1>
+        <div class="bens-e-direitos">
+          <h2>Bens e Direitos</h2>
+          <p>
+            Na seção "Bens e Direitos", clique no botão "Novo" e declare cada
+            ativo separado informando o grupo e o código abaixo.
+          </p>
+        </div>
+        <div class="info-acoes">
+          <h2>Ações Brasileiras</h2>
+          <p>Grupo 03 - Participações Societárias</p>
+          <p>Código 01 - Ações (inclusive as listadas em bolsa)</p>
+        </div>
+        <div class="info-fii">
+          <h2>Fundos Imobiliários (FIIs)</h2>
+          <p>Grupo 07 - Fundos</p>
+          <p>Código 03 - Fundos de Investimento Imobiliário (FII)</p>
+        </div>
+        <div class="info-etf">
+          <h2>Fundos de Índice (ETFs)</h2>
+          <p>Grupo 07 - Fundos</p>
+          <p>Código 09 - Demais Fundos de Índice de Mercado (ETFs)</p>
+        </div>
+        <div class="info-bdr">
+          <h2>Ações Globais (BDRs)</h2>
+          <p>Grupo 04 - Aplicações e Investimentos</p>
+          <p>
+            Código 04 - Ativos negociados em bolsa no Brasil (BDRs, opções e
+            outros - exceto ações e fundos)
+          </p>
+        </div>
+      </div>
+      <form id="investment-form">
+        <div class="input-ativo">
+          <div class="form1">
+            <h2>Cadastre seus ativos</h2>
+            <label for="codigo-ativo">Código do Ativo:</label>
+            <input type="text" id="codigo-ativo" required />
+
+            <label for="numero-cotas">Número de Cotas:</label>
+            <input type="text" id="numero-cotas" required />
+
+            <label for="valor-total-ano">Valor Total no Ano:</label>
+            <input type="text" id="valor-total-ano" required />
+
+            <label for="cnpj-corretora">CNPJ da Corretora:</label>
+            <input type="text" id="cnpj-corretora" required />
+
+            <label for="nome-corretora">Corretora:</label>
+            <input type="text" id="nome-corretora" required />
+          </div>
+        </div>
+        <div class="form2">
+          <div class="tipo-ativo-opt">
+            <label for="tipo-ativo">Tipo de Ativo:</label>
+            <div class="option-ativo">
+              <input
+                type="radio"
+                id="tipo-ativo-acao"
+                name="tipo-ativo"
+                value="acao"
+                required
+              />
+              <label for="tipo-ativo-acao">AÇÃO</label>
+
+              <input
+                type="radio"
+                id="tipo-ativo-fii"
+                name="tipo-ativo"
+                value="fii"
+                required
+              />
+              <label for="tipo-ativo-fii">FII</label>
+
+              <input
+                type="radio"
+                id="tipo-ativo-etf"
+                name="tipo-ativo"
+                value="etf"
+                required
+              />
+              <label for="tipo-ativo-etf">ETF</label>
+
+              <input
+                type="radio"
+                id="tipo-ativo-bdr"
+                name="tipo-ativo"
+                value="bdr"
+                required
+              />
+              <label for="tipo-ativo-bdr">BDR</label>
+            </div>
+          </div>
+          <div class="botao">
+            <button id="adicionar-ativo" type="submit">Adicionar Ativo</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="tabela-de-ativos">
+      <h2>Investimentos Registrados</h2>
+      <table id="tabela">
+        <thead>
+          <tr class="cabeca">
+            <th>Código</th>
+            <th>Tipo</th>
+            <th>CNPJ do Ativo</th>
+            <th>Número de Cotas</th>
+            <th>Valor Total</th>
+            <th>Preço Médio</th>
+            <th>CNPJ da Corretora</th>
+            <th>Nome da Corretora</th>
+            <th>Descrição</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="investment-list"></tbody>
+      </table>
+    </div>
+    <footer>
+      <p>
+        © 2023 Desenvolvido por Wallace Oliveira Santos. Todos os direitos
+        reservados.
+      </p>
+    </footer>
+  </body>
+</html>

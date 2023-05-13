@@ -1,0 +1,276 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background-color: #ffffff;
+  flex-wrap: nowrap;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #7100c6;
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
+.cabecalho {
+  display: flex;
+  width: 90%;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+}
+
+.form-ativo {
+  margin: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.option-ativo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.option-ativo input {
+  cursor: pointer;
+}
+
+.input-ativo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.tipo-ativo-opt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  background-color: #7100c6;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+}
+
+.input-ativo .form1 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.infos {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  gap: 1.5rem;
+  max-width: 100%;
+  width: 600px;
+  background-color: #7100c6;
+  padding: 2rem;
+  color: #fdfdfd;
+  border-radius: 5px;
+}
+
+.infos p {
+  width: 100%;
+}
+
+.form2 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#investment-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  gap: 1rem;
+}
+
+.form1 label {
+  font-size: 1rem;
+  color: #181818;
+  font-weight: bold;
+}
+
+.botao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.botao button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  background-color: #7100c6;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.listas {
+  margin: 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+.menu-list {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+button {
+  display: inline-block;
+  padding: 5px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  background-color: #f3f3f3;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 3px;
+}
+
+.button-clicked {
+  background-color: #00ce67;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+#menu-listas-salvas {
+  display: block;
+  width: 150px;
+  padding: 2px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #181818;
+}
+
+#menu-listas-salvas option {
+  padding: 5px;
+}
+
+input {
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.tabela-de-ativos {
+  margin: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 90%;
+  gap: 1rem;
+}
+
+.tabela-de-ativos h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.tabela-de-ativos table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabela-de-ativos th,
+.tabela-de-ativos td {
+  padding: 8px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.tabela-de-ativos th {
+  background-color: #7100c6;
+  font-weight: bold;
+  color: #fff;
+}
+
+.cabeca {
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.tabela-de-ativos tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+#investment-list {
+  font-size: 12px;
+}
+
+footer {
+  width: 100%;
+  background-color: #7100c6;
+  padding: 20px;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+footer p {
+  color: #fff;
+  font-size: 14px;
+}
