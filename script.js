@@ -385,7 +385,7 @@ function copiarDescricao(event) {
 function carregarArquivoCSV() {
   // Lógica para carregar o arquivo CSV
   // Exemplo:
-  fetch("./dadosb3.csv")
+  fetch("./dados.csv")
     .then((response) => response.text())
     .then((data) => lerArquivoCSV(data))
     .catch((error) =>
