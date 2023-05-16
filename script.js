@@ -168,7 +168,7 @@ function apagarListaSelecionada() {
   if (chaveSelecionada) {
     localStorage.removeItem(chaveSelecionada);
     atualizarListasSalvas();
-    carregarListaSalva();
+    //    carregarListaSalva();
   }
 }
 
@@ -289,22 +289,11 @@ function apagarLinha(event) {
 // Chamar a função para atualizar o menu de listas salvas ao carregar a página
 document.addEventListener("DOMContentLoaded", function () {
   atualizarListasSalvas();
-  carregarListaSalva(); // Adicione essa linha para carregar a lista salva ao carregar a página
+  //  carregarListaSalva(); // Carrega a lista salva ao carregar a página
 });
 // Chamar a função para carregar a lista salva quando uma opção do menu for selecionada
 const menuListasSalvas = document.getElementById("menu-listas-salvas");
 menuListasSalvas.addEventListener("change", carregarListaSalva);
-
-// Função para buscar um ativo pelo código
-function buscarAtivoPorCodigo(codigo) {
-  // Encontre o ativo na lista de ativos pelo código
-  const ativoEncontrado = listaAtivos.find(
-    (ativo) => ativo.codigoAtivo === codigo
-  );
-
-  // Retorna o ativo encontrado ou null se não encontrado
-  return ativoEncontrado || null;
-}
 
 // Função para registrar um novo investimento
 function registrarInvestimento(event) {
@@ -326,6 +315,16 @@ function registrarInvestimento(event) {
   const cnpjCorretora = cnpjCorretoraInput.value.toUpperCase();
   const nomeCorretora = nomeCorretoraInput.value.toUpperCase();
 
+  // Função para buscar um ativo pelo código
+  function buscarAtivoPorCodigo(codigo) {
+    // Encontre o ativo na lista de ativos pelo código
+    const ativoEncontrado = listaAtivos.find(
+      (ativo) => ativo.codigoAtivo === codigo
+    );
+
+    // Retorna o ativo encontrado ou null se não encontrado
+    return ativoEncontrado || null;
+  }
   // Busca as informações do ativo pelo código
   const informacoesAtivo = buscarAtivoPorCodigo(codigoAtivo);
 
