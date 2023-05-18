@@ -13,8 +13,9 @@ function lerArquivoCSV(conteudoCSV) {
 
     // Extrai os valores das colunas
     const codigoAtivo = colunas[0];
-    const razaoSocial = colunas[1];
-    const cnpj = colunas[2];
+    const razaoSocial = decodeURIComponent(colunas[1]);
+    const cnpj =
+      colunas[2] !== undefined ? parseFloat(colunas[2].replace(",", "")) : null;
 
     // Crie um objeto de ativo com os valores das colunas
     const ativo = {
@@ -384,7 +385,7 @@ function copiarDescricao(event) {
 function carregarArquivoCSV() {
   // Lógica para carregar o arquivo CSV
   // Exemplo:
-  fetch("./dados.csv")
+  fetch("dados_corrigido.csv")
     .then((response) => response.text())
     .then((data) => lerArquivoCSV(data))
     .catch((error) =>
