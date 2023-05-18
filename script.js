@@ -2,31 +2,38 @@
 const listaAtivos = [];
 
 // Função para ler o conteúdo do arquivo CSV
-function lerArquivoCSV(conteudoCSV) {
-  // Divide o conteúdo do arquivo em linhas
-  const linhas = conteudoCSV.split("\n");
+function lerArquivoXLSX(arrayBuffer) {
+  const workbook = XLSX.read(arrayBuffer, { type: "array" });
 
-  // Percorre as linhas do arquivo
-  linhas.forEach((linha) => {
-    // Divide a linha em colunas
-    const colunas = linha.split(";");
+  // Assume-se que a primeira planilha será usada
+  const sheet = workbook.Sheets[workbook.SheetNames[0]];
 
-    // Extrai os valores das colunas
-    const codigoAtivo = colunas[0];
-    const razaoSocial = decodeURIComponent(colunas[1]);
-    const cnpj =
-      colunas[2] !== undefined ? parseFloat(colunas[2].replace(",", "")) : null;
+  // Converter a planilha em uma matriz de objetos
+  const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
 
-    // Crie um objeto de ativo com os valores das colunas
-    const ativo = {
-      codigoAtivo,
-      razaoSocial,
-      cnpj,
-    };
+  // Iterar sobre as linhas da matriz jsonData
+  for (let i = 0; i < jsonData.length; i++) {
+    const linha = jsonData[i];
 
-    // Adicione o ativo à lista de ativos
-    listaAtivos.push(ativo);
-  });
+    // Verificar se a linha tem exatamente 3 células
+    if (linha.length === 3) {
+      const codigoAtivo = linha[0];
+      const razaoSocial = linha[1];
+      const cnpj = linha[2];
+
+      // Crie um objeto de ativo com os valores das colunas
+      const ativo = {
+        codigoAtivo,
+        razaoSocial,
+        cnpj,
+      };
+
+      // Adicione o ativo à lista de ativos
+      listaAtivos.push(ativo);
+    } else {
+      console.log(`A linha ${i + 1} não possui 3 células. Ignorando...`);
+    }
+  }
 }
 
 // Função para salvar a lista atual
@@ -146,6 +153,12 @@ function atualizarListasSalvas() {
   const menuListasSalvas = document.getElementById("menu-listas-salvas");
   menuListasSalvas.innerHTML = "";
 
+  // Adiciona a opção de lista em branco
+  const blankOption = document.createElement("option");
+  blankOption.value = "";
+  blankOption.textContent = "Listas";
+  menuListasSalvas.appendChild(blankOption);
+
   // Percorre todas as chaves do armazenamento local
   for (let i = 0; i < localStorage.length; i++) {
     const chave = localStorage.key(i);
@@ -169,7 +182,7 @@ function apagarListaSelecionada() {
   if (chaveSelecionada) {
     localStorage.removeItem(chaveSelecionada);
     atualizarListasSalvas();
-    //    carregarListaSalva();
+    carregarListaSalva();
   }
 }
 
@@ -290,11 +303,18 @@ function apagarLinha(event) {
 // Chamar a função para atualizar o menu de listas salvas ao carregar a página
 document.addEventListener("DOMContentLoaded", function () {
   atualizarListasSalvas();
-  //  carregarListaSalva(); // Carrega a lista salva ao carregar a página
+  carregarListaSalva(); // Carrega a lista salva ao carregar a página
 });
 // Chamar a função para carregar a lista salva quando uma opção do menu for selecionada
 const menuListasSalvas = document.getElementById("menu-listas-salvas");
 menuListasSalvas.addEventListener("change", carregarListaSalva);
+
+// Função para validar o código do ativo
+function validarCodigoAtivo(codigoAtivo) {
+  // Verifica se o código do ativo contém apenas letras maiúsculas e números
+  const regex = /^[A-Z0-9]+$/;
+  return regex.test(codigoAtivo);
+}
 
 // Função para registrar um novo investimento
 function registrarInvestimento(event) {
@@ -315,6 +335,12 @@ function registrarInvestimento(event) {
   const valorTotalAno = parseFloat(valorTotalAnoInput.value.replace(",", "."));
   const cnpjCorretora = cnpjCorretoraInput.value.toUpperCase();
   const nomeCorretora = nomeCorretoraInput.value.toUpperCase();
+
+  // Verifica se o código do ativo é válido
+  if (!validarCodigoAtivo(codigoAtivo)) {
+    console.log("Código de ativo inválido.");
+    return;
+  }
 
   // Função para buscar um ativo pelo código
   function buscarAtivoPorCodigo(codigo) {
@@ -382,16 +408,16 @@ function copiarDescricao(event) {
 }
 
 // Função para carregar o arquivo CSV e iniciar o aplicativo
-function carregarArquivoCSV() {
-  // Lógica para carregar o arquivo CSV
+function carregarArquivoXLSX() {
+  // Lógica para carregar o arquivo XLSX
   // Exemplo:
-  fetch("dados_corrigido.csv")
-    .then((response) => response.text())
-    .then((data) => lerArquivoCSV(data))
+  fetch("dados_fiis_b3.xlsx")
+    .then((response) => response.arrayBuffer())
+    .then((data) => lerArquivoXLSX(data))
     .catch((error) =>
-      console.log("Ocorreu um erro ao carregar o arquivo CSV:", error)
+      console.log("Ocorreu um erro ao carregar o arquivo XLSX:", error)
     );
 }
 
 // Chama a função para carregar o arquivo CSV e iniciar o aplicativo
-carregarArquivoCSV();
+carregarArquivoXLSX();
